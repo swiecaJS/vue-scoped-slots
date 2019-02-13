@@ -7,7 +7,7 @@
           <img :src="user.picture.thumbnail" :alt="`${user.name.first} avatar`">
         </div>
         <div class="user__data">
-          <p>{{user.name.first}} {{user.name.last}}</p>
+          <h4>{{user.name.first}} {{user.name.last}}</h4>
           <p>
             <em>{{user.email}}</em>
           </p>
@@ -39,24 +39,32 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+h4,
+p {
+  padding: 0;
+  margin: 0;
+}
+
 .users {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+  text-align: left;
 }
 
 .user {
   display: flex;
-  min-width: 300px;
-  justify-content: space-between;
-  border: 1px solid #eee;
-  padding: 0 20px;
+  padding: 10px 20px;
+  min-width: 290px;
   margin-bottom: 10px;
+  box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.1);
+  font-size: 14px;
 
   &__image {
     display: flex;
     align-items: center;
+    margin-right: 10px;
 
     img {
       border-radius: 100%;
