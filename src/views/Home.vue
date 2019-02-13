@@ -4,7 +4,7 @@
       <img alt="Vue logo" src="../assets/logo.png">
     </div>
     <div class="home__texts">
-      <h1>Vue.js scoped slots</h1>
+      <h1>Understaning scoped slots</h1>
       <p>
         <em>Syntax changes in Vue 2.6</em>
       </p>
