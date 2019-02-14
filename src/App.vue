@@ -2,6 +2,7 @@
   <div id="app">
     <TheHeader/>
     <router-view/>
+    <TheFooter/>
   </div>
 </template>
 
@@ -16,10 +17,9 @@ export default {
 
 
 <style lang="scss">
-body {
-  margin: 0;
+:root {
+  --header-height: 80px;
 }
-
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

@@ -23,7 +23,6 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: calc(100vh - var(--header-height) - var(--footer-height));
-  // height: calc(100vh - 80px);
+  height: calc(100vh - var(--header-height));
 }
 </style>
