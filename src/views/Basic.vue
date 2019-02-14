@@ -1,9 +1,12 @@
 <template>
-  <section>
+  <section class="view">
     <div class="title">
       <h1>Basic usage</h1>
       <p>Alter display of a component</p>
-      <p>Access child props in parent</p>
+      <p>
+        Access
+        <strong>child props</strong> in parent
+      </p>
     </div>
     <div class="examples">
       <div class="example">

@@ -1,6 +1,6 @@
 <template>
   <header id="header" class="header">
-    <div class="header__title">
+    <div class="header__title" @click="$router.push('/')">
       <h1>Vue Scoped Slots</h1>
     </div>
     <div class="header__links">
@@ -28,6 +28,7 @@ export default {};
   &__title {
     padding: 0 20px;
     align-self: center;
+    cursor: pointer;
   }
 
   &__links {

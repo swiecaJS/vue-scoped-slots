@@ -13,8 +13,6 @@
 </template>
 
 <script>
-// @ is an alias to /src
-
 export default {
   name: "home"
 };
@@ -25,7 +23,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: calc(100vh - var(--header-height));
+  height: calc(100vh - var(--header-height) - var(--footer-height));
   // height: calc(100vh - 80px);
 }
 </style>

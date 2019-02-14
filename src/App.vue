@@ -16,9 +16,8 @@ export default {
 
 
 <style lang="scss">
-:root {
-  --primary: #fdc22a;
-  --header-height: 80px;
+body {
+  margin: 0;
 }
 
 #app {
