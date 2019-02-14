@@ -16,7 +16,7 @@ export default {};
 </script>
 
 
-<style lang="scss" >
+<style lang="scss" scoped>
 .header {
   display: flex;
   background: #42b983;
