@@ -3,6 +3,7 @@
     <slot name="inputHeader"></slot>
     <input type="text" v-model="query">
     <slot name="results" :isLoading="isLoading" :results="results"></slot>
+    <slot name="tokenExpired" :isTokenExpired="isTokenExpired"></slot>
   </div>
 </template>
 
@@ -17,26 +18,23 @@ export default {
     return {
       query: "",
       debouncedAskSpotify: null,
-      axiosInstance: null,
       isLoading: false,
-      results: null
+      results: null,
+      isTokenExpired: false
     };
   },
   created() {
     this.debouncedAskSpotify = this.debounce(this.askSpotify, 500);
-    this.axiosInstance = axios;
-    // this.axiosInstance.defaults.baseUrl = "https://api.spotify.com";
-    this.axiosInstance.defaults.headers.common = {
-      Authorization: `Bearer ${this.apiKey}`,
-      Accept: "application/json",
-      "Content-Type": "application/json"
-    };
   },
   watch: {
     query(query) {
       if (query) {
         this.debouncedAskSpotify(query);
       }
+    },
+    apiKey(newKey) {
+      console.log("mamy nowy klucz", newKey);
+      this.debouncedAskSpotify = this.debounce(this.askSpotify, 500);
     }
   },
   methods: {
@@ -51,18 +49,27 @@ export default {
     askSpotify(query) {
       console.log("ask spotify", query, this.apiKey, this.queryType);
       this.isLoading = true;
-      this.axiosInstance
+      axios
         .get(
           `https://api.spotify.com/v1/search?q=${window.encodeURIComponent(
             query
-          )}&type=${this.queryType}`
+          )}&type=${this.queryType}`,
+          {
+            headers: {
+              Authorization: `Bearer ${this.apiKey}`,
+              Accept: "application/json",
+              "Content-Type": "application/json"
+            }
+          }
         )
         .then(response => {
-          console.log("axios response", response);
           this.results = response.data;
+          this.isTokenExpired = false;
         })
         .catch(err => {
-          console.log(err);
+          if (String(err).includes("401")) {
+            this.isTokenExpired = true;
+          }
         })
         .finally(() => (this.isLoading = false));
     }

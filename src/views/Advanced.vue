@@ -6,24 +6,34 @@
     <div class="tokenInfo">
       <hr>
       <p>At the beginning check if Spotify token is still valid</p>
-      <p>
-        Current token:
-        <input type="text" v-model="apiKey">
-      </p>
+      <p>Current token:</p>
+      <textarea name id cols="30" rows="10" v-model="apiKey"></textarea>
       <hr>
     </div>
     <article class="example">
       <h2>#1 - component will display what's availible</h2>
       <pre>{{firstExample}}</pre>
       <SpotifySearch :queryType="'artist'" :apiKey="apiKey" class="search">
-        <template v-slot:inputHeader>
+        <template #inputHeader>
           <h3>Search for Spotify Artist</h3>
         </template>
-        <template v-slot:results="{isLoading, results}">
+        <template #results="{isLoading, results}">
           <p>Is loading data: {{isLoading}}</p>
           <div v-show="results" class="resultsWrapper">
             <p>Api results:</p>
             <pre>{{results}}</pre>
+          </div>
+        </template>
+        <template #tokenExpired="{isTokenExpired}">
+          <div v-if="isTokenExpired" class="expiredToken">
+            <h3>Your Spotify token expired!</h3>
+            <p>They last only an hour ;C</p>
+            <p>
+              Go
+              <a
+                href="https://developer.spotify.com/console/get-search-item/?q=tania%20bowra&type=artist&market=&limit=&offset="
+              >here</a> and create new token
+            </p>
           </div>
         </template>
       </SpotifySearch>
@@ -32,10 +42,10 @@
       <h2>#2 - We will use that that as we wish</h2>
       <pre>{{secondExample}}</pre>
       <SpotifySearch :queryType="'artist'" :apiKey="apiKey" class="search">
-        <template v-slot:inputHeader>
+        <template #inputHeader>
           <h3>Search for Spotify Artist</h3>
         </template>
-        <template v-slot:results="{isLoading, results}">
+        <template #results="{isLoading, results}">
           <p v-show="isLoading">Loading...</p>
           <div v-if="results" class="resultsWrapper">
             <div class="artistWrapper">
@@ -45,6 +55,18 @@
                 :key="artist.id"
               />
             </div>
+          </div>
+        </template>
+        <template #tokenExpired="{isTokenExpired}">
+          <div v-if="isTokenExpired" class="expiredToken">
+            <h3>Your Spotify token expired!</h3>
+            <p>They last only an hour ;C</p>
+            <p>
+              Go
+              <a
+                href="https://developer.spotify.com/console/get-search-item/?q=tania%20bowra&type=artist&market=&limit=&offset="
+              >here</a> and create new token
+            </p>
           </div>
         </template>
       </SpotifySearch>
@@ -68,11 +90,11 @@ export default {
   `,
       firstExample: `
     <SpotifySearch :queryType="'artist'" :apiKey="apiKey" class="search">
-      <template v-slot:inputHeader>
+      <template #inputHeader>
         <h3>Search for Spotify Artist</h3>
         <p>This component just displays data</p>
       </template>
-      <template v-slot:results="{isLoading, results}">
+      <template #results="{isLoading, results}">
         <p>Is loading data: {{isLoading}}</p>
         <div v-show="results" class="resultsWrapper">
           <p>Api results:</p>
@@ -83,10 +105,10 @@ export default {
   `,
       secondExample: `
     <SpotifySearch :queryType="'artist'" :apiKey="apiKey" class="search">
-      <template v-slot:inputHeader>
+      <template #inputHeader>
         <h3>Search for Spotify Artist</h3></h3>
       </template>
-      <template v-slot:results="{isLoading, results}">
+      <template #results="{isLoading, results}">
         <p v-show="isLoading">Loading...</p>
         <div v-if="results" class="resultsWrapper">
           <div class="artistWrapper">
@@ -150,5 +172,18 @@ hr {
   border: 1px solid green;
   margin: 30px 0;
   background: #f7f7f7;
+}
+
+.expiredToken {
+  background: #cc0000;
+  padding: 20px;
+  color: #fff;
+
+  h3 {
+    font-size: 26px;
+  }
+  p {
+    font-size: 20px;
+  }
 }
 </style>

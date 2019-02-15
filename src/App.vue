@@ -20,6 +20,9 @@ export default {
 :root {
   --header-height: 80px;
 }
+body {
+  margin: 0;
+}
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
