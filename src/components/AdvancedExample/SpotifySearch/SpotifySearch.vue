@@ -32,8 +32,7 @@ export default {
         this.debouncedAskSpotify(query);
       }
     },
-    apiKey(newKey) {
-      console.log("mamy nowy klucz", newKey);
+    apiKey() {
       this.debouncedAskSpotify = this.debounce(this.askSpotify, 500);
     }
   },
@@ -47,7 +46,6 @@ export default {
       };
     },
     askSpotify(query) {
-      console.log("ask spotify", query, this.apiKey, this.queryType);
       this.isLoading = true;
       axios
         .get(

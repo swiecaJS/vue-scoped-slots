@@ -25,16 +25,7 @@
           </div>
         </template>
         <template #tokenExpired="{isTokenExpired}">
-          <div v-if="isTokenExpired" class="expiredToken">
-            <h3>Your Spotify token expired!</h3>
-            <p>They last only an hour ;C</p>
-            <p>
-              Go
-              <a
-                href="https://developer.spotify.com/console/get-search-item/?q=tania%20bowra&type=artist&market=&limit=&offset="
-              >here</a> and create new token
-            </p>
-          </div>
+          <TokenExpired v-if="isTokenExpired"/>
         </template>
       </SpotifySearch>
     </article>
@@ -58,16 +49,27 @@
           </div>
         </template>
         <template #tokenExpired="{isTokenExpired}">
-          <div v-if="isTokenExpired" class="expiredToken">
-            <h3>Your Spotify token expired!</h3>
-            <p>They last only an hour ;C</p>
-            <p>
-              Go
-              <a
-                href="https://developer.spotify.com/console/get-search-item/?q=tania%20bowra&type=artist&market=&limit=&offset="
-              >here</a> and create new token
-            </p>
+          <TokenExpired v-if="isTokenExpired"/>
+        </template>
+      </SpotifySearch>
+    </article>
+    <article class="example">
+      <h2>#3 - We will display another component</h2>
+      <pre>{{thirdExample}}</pre>
+      <SpotifySearch :queryType="'track'" :apiKey="apiKey" class="search">
+        <template #inputHeader>
+          <h3>Search for a tracks</h3>
+        </template>
+        <template #results="{isLoading, results}">
+          <p v-show="isLoading">Loading...</p>
+          <div v-if="results" class="resultsWrapper">
+            <div class="tracksWrapper">
+              <SpotifyTrack v-for="track in results.tracks.items" :track="track" :key="track.id"/>
+            </div>
           </div>
+        </template>
+        <template #tokenExpired="{isTokenExpired}">
+          <TokenExpired v-if="isTokenExpired"/>
         </template>
       </SpotifySearch>
     </article>
@@ -78,6 +80,8 @@
 <script>
 import SpotifySearch from "@/components/AdvancedExample/SpotifySearch/SpotifySearch.vue";
 import SpotifyArtist from "@/components/AdvancedExample/SpotifyArtist/SpotifyArtist.vue";
+import SpotifyTrack from "@/components/AdvancedExample/SpotifyTrack/SpotifyTrack.vue";
+import TokenExpired from "@/components/AdvancedExample/TokenExpired.vue";
 export default {
   data() {
     return {
@@ -122,13 +126,32 @@ export default {
       </template>
     </SpotifySearch>
   `,
+      thirdExample: `
+      <SpotifySearch :queryType="'track'" :apiKey="apiKey" class="search">
+        <template #inputHeader>
+          <h3>Search for a tracks</h3>
+        </template>
+        <template #results="{isLoading, results}">
+          <p v-show="isLoading">Loading...</p>
+          <div v-if="results" class="resultsWrapper">
+            <div class="tracksWrapper">
+              <SpotifyTrack v-for="track in results.tracks.items" :track="track" :key="track.id"/>
+            </div>
+          </div>
+        </template>
+        <template #tokenExpired="{isTokenExpired}">
+          <TokenExpired v-if="isTokenExpired"/>
+        </template>
+      </SpotifySearch>`,
       apiKey:
-        "BQBQHiKEj_SbES4H5dZOiSbGN5c6ff3HiaDCDsXI3YsktLG0EFLhlm7gQwJCgURMXtCvmHSsnYeTJAMI3I3Pd3JIiEuvJbaHxd3Li00CqAd9GcoOxM_5pvK0EXuWIKIDcL5rmHULtO1eqA"
+        "BQCBJf1rYRhnI3zYZkyQbW7AAVwYNCNrsEOaTqTcLiErfl8EImeyYCD5OxiyCdCQCQB-RikzSoljNP6M-Jo1EQFw5RqoX6DOS676TQQOpVC-x932ETnOuDlCWtD4i92na74ucU4B8iewRQ"
     };
   },
   components: {
     SpotifySearch,
-    SpotifyArtist
+    SpotifyArtist,
+    SpotifyTrack,
+    TokenExpired
   }
 };
 </script>
@@ -159,6 +182,13 @@ pre {
   justify-items: center;
 }
 
+.tracksWrapper {
+  display: grid;
+  padding: 20px 0;
+  grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+  justify-items: center;
+}
+
 .tokenInfo {
   background: #ddd;
   margin: 40px 0;
@@ -172,18 +202,5 @@ hr {
   border: 1px solid green;
   margin: 30px 0;
   background: #f7f7f7;
-}
-
-.expiredToken {
-  background: #cc0000;
-  padding: 20px;
-  color: #fff;
-
-  h3 {
-    font-size: 26px;
-  }
-  p {
-    font-size: 20px;
-  }
 }
 </style>

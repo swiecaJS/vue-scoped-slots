@@ -6,11 +6,6 @@
     <div class="artist__data">
       <h4>{{artist.name}}</h4>
     </div>
-    <!-- <div class="artist__generes">
-      <ul>
-        <li v-for="genere in artist.genres">{{genere}}</li>
-      </ul>
-    </div>-->
   </article>
 </template>
 
