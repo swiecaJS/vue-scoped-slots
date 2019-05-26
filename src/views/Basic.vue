@@ -10,18 +10,21 @@
     </div>
     <div class="examples">
       <div class="example">
-        <pre>{{userListSyntax}}</pre>
-        <UsersList/>
+        <pre>{{ userListSyntax }}</pre>
+        <UsersList />
       </div>
       <div class="example">
         <div class="code-wrapper">
-          <pre>{{userListWithSlotsSyntax}}</pre>
+          <pre>{{ userListWithSlotsSyntax }}</pre>
         </div>
         <UsersListWithSlot>
-          <template v-slot="{user}">
-            <div class="text--red text--heavy">{{user.name.first}} {{user.name.last}}</div>
-            <div>Age: {{user.dob.age}}</div>
-            <div>Phone:{{user.phone}}</div>
+          <template v-slot="{ user }">
+            <div class="text--red text--heavy">
+              {{ user.name.first }} {{ user.name.last }}
+            </div>
+            <div>Age: {{ user.dob.age }}</div>
+            <div>Phone:{{ user.phone }}</div>
+            <div>City:{{ user.location.city }}</div>
           </template>
         </UsersListWithSlot>
       </div>
@@ -35,7 +38,7 @@ import UsersListWithSlot from "@/components/Users/UsersListWithSlot/UsersListWit
 export default {
   components: {
     UsersList,
-    UsersListWithSlot
+    UsersListWithSlot,
   },
   data() {
     return {

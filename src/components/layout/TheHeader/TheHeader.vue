@@ -7,14 +7,14 @@
       <router-link to="/">
         <p>Home</p>
       </router-link>
-      <router-link to="/basic">
+      <!-- <router-link to="/basic">
         <p>Basic</p>
-      </router-link>
-      <router-link to="/advanced">
-        <p>Advanced</p>
+      </router-link> -->
+      <router-link to="/spotify">
+        <p>Spotify example</p>
       </router-link>
       <a
-        href="http://blog.swiecajs.pl/javascript/vue/2019/02/15/vue-scoped-slots.html"
+        href="http://swiecajs.github.io/javascript/vue/2019/02/15/vue-scoped-slots.html"
         target="_blank"
         rel="noopener"
         class

@@ -12,14 +12,9 @@ export default new Router({
       component: Home
     },
     {
-      path: "/basic",
-      name: "basic",
-      component: () => import("./views/Basic.vue")
-    },
-    {
-      path: "/advanced",
-      name: "advanced",
-      component: () => import("./views/Advanced.vue")
+      path: "/spotify",
+      name: "spotify",
+      component: () => import("./views/Spotify.vue")
     }
   ]
 });

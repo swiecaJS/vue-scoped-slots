@@ -7,12 +7,7 @@
           <img :src="user.picture.thumbnail" :alt="`${user.name.first} avatar`">
         </div>
         <div class="user__data">
-          <h4>
-            <slot :user="user"></slot>
-          </h4>
-          <p>
-            <em>{{user.email}}</em>
-          </p>
+          <slot :user="user"></slot>
         </div>
       </div>
     </div>
