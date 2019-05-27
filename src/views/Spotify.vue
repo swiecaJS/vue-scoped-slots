@@ -1,6 +1,6 @@
 <template>
   <section>
-    <h1>Advanced</h1>
+    <h1>Spotify example</h1>
     <p>
       We can resuse data, and leave heavy lifting to a component (like auth, api
       calls)
